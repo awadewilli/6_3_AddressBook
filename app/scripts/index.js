@@ -13,12 +13,11 @@ $(function(){
   // Setup app
   var contacts = new Contacts();
   var addressBook = new AddressBook({collection: contacts});
-  var formView = new FormView();
+  var formView = new FormView({collection: contacts});
   contacts.add([
     {'test':1245}
   ]);
 
-console.log(contacts);
 
 
 });

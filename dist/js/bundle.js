@@ -15,12 +15,11 @@ $(function(){
   // Setup app
   var contacts = new Contacts();
   var addressBook = new AddressBook({collection: contacts});
-  var formView = new FormView();
+  var formView = new FormView({collection: contacts});
   contacts.add([
     {'test':1245}
   ]);
 
-console.log(contacts);
 
 
 });
@@ -68,43 +67,53 @@ var $        = require('jquery');
 
 var formGroup = $('.contact-form')[0];
 
+$.fn.serializeObject = function() {
+return this.serializeArray().reduce(function(acum, i) {
+acum[i.name] = i.value;
+return acum;
+}, {});
+};
+
+
 var FormView = Backbone.View.extend({
 
-el: formGroup,
-
 events:{
-  "submit":"renderForm"
+  "submit":"getFormData"
+
 },
+el: formGroup,
 initialize: function(){
 
 },
 render: function(){
-  this.$el.html(this.template(this.model.toJSON()));
-      return this;
+this.$el.html();
+return this;
 },
-renderForm:function(event){
 
+getFormData:function(event){
 event.preventDefault();
-console.log('test');
-  $.fn.serializeObject = function() {
-    return this.serializeArray().reduce(function(acum, i) {
-      acum[i.name] = i.value;
-      return acum;
-    }, {});
-  };
+var data = this.$el.serializeObject();
+console.log(data);
+// this.collection.add(data);
+// this.render();
 }
-
-
-
 });
 
+
 var AddressBook = Backbone.View.extend({
-  initialize: function(){
+tagName:'ul',
+
+    initialize: function(){
+      this.ListenTo(this.collection,add,this.renderchild);
+    },
+    renderchild: function(contact){
+      var view = new ContactItemView({model:contact});
 
     },
     render: function(){
 
-    }
+    },
+
 
 });
 
