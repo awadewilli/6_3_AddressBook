@@ -8,7 +8,7 @@ var formGroup = $('.contact-form')[0];
 
 var FormView = Backbone.View.extend({
 
-template: formGroup,
+el: formGroup,
 
 events:{
   "submit":"renderForm"
@@ -24,12 +24,12 @@ renderForm:function(event){
 
 event.preventDefault();
 console.log('test');
-  // $.fn.serializeObject = function() {
-  //   return this.serializeArray().reduce(function(acum, i) {
-  //     acum[i.name] = i.value;
-  //     return acum;
-  //   }, {});
-  // };
+  $.fn.serializeObject = function() {
+    return this.serializeArray().reduce(function(acum, i) {
+      acum[i.name] = i.value;
+      return acum;
+    }, {});
+  };
 }
 
 
