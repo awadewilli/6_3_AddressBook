@@ -1,7 +1,7 @@
-var Backbone = require('Backbone');
+var Backbone = require('backbone');
 var $        = require('jquery');
 
-var contact = Backbone.Model.extend({
+var Contact = Backbone.Model.extend({
 defaults:{
   'email':'test@theironyard.com',
   'first-name':'iron',
@@ -13,4 +13,4 @@ defaults:{
 
 });
 
-module.exports = contact;
+module.exports = Contact;

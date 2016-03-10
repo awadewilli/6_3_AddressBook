@@ -1,7 +1,11 @@
-var Backbone = require('Backbone');
+var Backbone = require('backbone');
 var $        = require('jquery');
-var contact  = require('contact');
 
-var contacts = Backbone.collection.extend({
-  model: contact
+var Contact  = require('./contact');
+
+var Contacts = Backbone.Collection.extend({
+  model: Contact
+
 });
+
+module.exports = Contacts;
